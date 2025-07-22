@@ -26,7 +26,7 @@ def codificador_convolucional(in_bits):
 
 if __name__ == "__main__":
     mensaje = input("Ingrese el mensaje a codificar (puede ser texto o binario): ")
-    # Detectar si la entrada es binaria (solo 0s y 1s)
+ 
     if all(c in '01' for c in mensaje) and len(mensaje) % 8 == 0:
         bits = mensaje
         print("Entrada detectada como binaria.")
