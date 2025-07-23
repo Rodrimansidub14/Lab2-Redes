@@ -37,6 +37,14 @@ fn crc32_bitwise(data: &[u8]) -> u32 {
     !crc
 }
 
+fn bytes_to_binary_string(bytes: &[u8]) -> String {
+    bytes
+        .iter()
+        .map(|b| format!("{:08b}", b))
+        .collect::<Vec<_>>()
+        .join("")
+}
+
 fn main() {
     let mut input = String::new();
     println!("Ingresa un numero binario:");
@@ -51,6 +59,10 @@ fn main() {
     }
 
     let checksum = crc32_bitwise(&data);
+    let crc_bin = format!("{:032b}", checksum);
+    let original_bin = bytes_to_binary_string(&data);
+    let final_message = format!("{}{}", original_bin, crc_bin);
 
-    println!("El resultado del algoritmo es: {:032b}", checksum);
+    println!("El resultado del algoritmo es: {}", crc_bin);
+    println!("El mensaje a enviar es: {}", final_message);
 }
