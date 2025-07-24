@@ -39,7 +39,7 @@ def verify_crc(complete_message_bin):
 
     crc_calc = crc32_bitwise(data_bytes)
 
-    print(f"El mensaje recibido fue: {data_bin}")
+    print(f"El mensaje recibido fue: {complete_message_bin}")
 
     if recieved_crc == crc_calc:
         original_message = bytes_to_binstr(data_bytes, len(data_bin))
