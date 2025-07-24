@@ -23,7 +23,6 @@ int encode_output(int state, int input_bit, int *out1, int *out2) {
     return 0;
 }
 
-
 void viterbi_decode(const char *input, int length, int *decoded_bits, int *metric_out) {
     int num_steps = length / 2;
     State states[NUM_STATES], next_states[NUM_STATES];
@@ -73,7 +72,6 @@ void viterbi_decode(const char *input, int length, int *decoded_bits, int *metri
     *metric_out = best_metric;
 }
 
-// Convierte una secuencia de bits a texto ASCII
 void bits_a_texto_ascii(int *bits, int num_bits) {
     printf("Mensaje ASCII decodificado: ");
     int i = 0;
@@ -84,7 +82,6 @@ void bits_a_texto_ascii(int *bits, int num_bits) {
         }
         printf("%c", val);
     }
-    // Si sobran bits no múltiples de 8, los ignoramos (flush)
     printf("\n");
 }
 
@@ -94,21 +91,16 @@ int main() {
     scanf("%s", input);
 
     int length = strlen(input);
-    printf("[DEBUG] Longitud de entrada: %d\n", length);
     if (length % 2 != 0) {
         printf("Error: longitud no válida\n");
         return 1;
     }
 
     int num_steps = length / 2;
-    int num_decoded = num_steps - (K - 1); // Solo los bits originales, sin flush
-    printf("[DEBUG] Bits a decodificar: %d (deben coincidir con los bits originales)\n", num_decoded);
-
+    int num_decoded = num_steps - (K - 1);
     int decoded_bits[1024] = {0};
     int metric = 0;
     viterbi_decode(input, length, decoded_bits, &metric);
-
-    printf("Métrica de error total: %d\n", metric);
 
     printf("Bits decodificados: ");
     for (int i = 0; i < num_decoded; i++)
@@ -116,6 +108,15 @@ int main() {
     printf("\n");
 
     bits_a_texto_ascii(decoded_bits, num_decoded);
+
+    // Mensaje sobre corrección de errores
+    if (metric == 0) {
+        printf("Sin errores detectados.\n");
+    } else if (metric == 1) {
+        printf("Se detectó y corrigió 1 error en la transmisión.\n");
+    } else {
+        printf("Se detectaron y corrigieron %d errores, pero el mensaje puede estar corrupto si hay más de un error.\n", metric);
+    }
 
     return 0;
 }
