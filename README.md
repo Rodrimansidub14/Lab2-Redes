@@ -26,3 +26,12 @@ cargo run
 ```
 
 El programa solicitara un numero en binario con una longitud maxima de 32 bits. Luego de recibir el numero, el programa imprimira en pantalla el mensaje final, listo para ser enviado.
+
+#### Receptor
+Correr el archivo utilizando python.
+
+```bash
+python crc_32_r.py
+```
+
+El programa solicitara un numero en binario. Se debe ingresar el numero obtenido por el emisor, y el programa devolvera el mensaje original.
