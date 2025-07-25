@@ -1,3 +1,6 @@
+import socket
+import random
+
 def texto_a_binario(texto):
     """
     Convierte un string en su representación binaria 
@@ -27,9 +30,17 @@ def codificador_convolucional(in_bits):
     print(f"[DEBUG] Longitud de mensaje codificado: {len(out)}")
     return ''.join(str(b) for b in out)
 
+
+def aplicar_ruido(bits, error_rate=0.01):
+    """Aplica ruido a la cadena de bits con una probabilidad dada."""
+    return ''.join(
+        str(int(b) ^ (random.random() < error_rate))
+        for b in bits
+    )
+
 if __name__ == "__main__":
     mensaje = input("Ingrese el mensaje a codificar (puede ser texto o binario): ")
- 
+
     if all(c in '01' for c in mensaje) and len(mensaje) % 8 == 0:
         bits = mensaje
         print("Entrada detectada como binaria.")
@@ -39,3 +50,11 @@ if __name__ == "__main__":
 
     codificado = codificador_convolucional(bits)
     print(f"Mensaje codificado: {codificado}")
+
+    con_ruido = aplicar_ruido(codificado, error_rate=0.01)
+    print(f"Mensaje con ruido: {con_ruido}")
+
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.connect(('localhost', 45000))
+        s.sendall(con_ruido.encode())
+    print("Mensaje enviado al receptor por socket en puerto 45000.")
