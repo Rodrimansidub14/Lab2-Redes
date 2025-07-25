@@ -35,3 +35,8 @@ python crc_32_r.py
 ```
 
 El programa solicitara un numero en binario. Se debe ingresar el numero obtenido por el emisor, y el programa devolvera el mensaje original.
+
+## Tests de los programas:
+Los test de los programas se encuentran en el archivo [Tests.md](Tests.md).
+
+Tambien se puede encontrar el PDF de este archivo en [Tests.pdf](Tests.pdf)
