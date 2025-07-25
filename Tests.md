@@ -244,27 +244,32 @@ Codificado
 ### Justificación de resultados
 #### Sin errores:
 **Justificación:**
-
+El mensaje fue enviado y recibido sin problemas, mostrando el mensaje original desde el lado del receptor. 
 
 #### Un error:
 **Justificación:**
-
+Cuando hubo un error, el algoritmo fue capaz de detectarlo y descartar el mensaje corrupto. Debido al funcionamiento del algoritmo, todos los errores de 1 bit son facilmente detectados.
 
 #### Dos o más errores:
 **Justificación:**
-
+En el caso de dos o mas errores, el algoritmo tambien fue capaz de detectarlo y descartar el mensaje, probando que tambien es infalible respecto a errores de 2 bits. Aun asi, pueden existir combinaciones de mas de 2 bits que sean capaces de saltarse el chequeo del algoritmo, como se discutira a continuacion.
 
 
 ## Preguntas
 #### ¿Es posible manipular los bits de tal forma que el algoritmo CRC-32 no detecte el error?
-
+En el caso del algoritmo CRC-32, es posible, aunque altamente improbable, que exista una combinacion de cambios de bits que genere una cadena CRC-32 identica a otra. En este caso, el receptor podria recibir un mensaje diferente al enviado por el emisor sin que el algoritmo pueda hacer nada para detenerlo.
 
 
 #### Ventajas y desventajas
 
 **Ventajas:**
 
-
+- El algoritmo es capaz de detectar todos los errores de 1 y 2 bits, asi como rafagas de hasta 32 bits.
+- Es un algoritmo rapido en operacion, ya que solo requiere operaciones shift y XOR.
+- Es un algoritmo sencillo de implementar.
 
 **Desventajas:**
 
+- A diferencia del algoritmo de Viterbi, CRC-32 no es capaz de corregir errores, solo de detectarlos.
+- Tiene un overhead alto debido a que agrega 32 bits extra al mensaje.
+- Existen casos (aunque muy raros) en los que el algoritmo no detecte errores en mensajes corruptos.
