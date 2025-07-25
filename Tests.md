@@ -166,3 +166,105 @@ El algoritmo Viterbi siempre detecta diferencias entre la secuencia recibida y l
 
 - Solo garantiza corrección de un error por ventana; si hay varios errores cercanos, el algoritmo puede fallar y producir mensajes corruptos sin advertencia explícita.
 
+## CRC-32 
+
+### Ningun Error
+
+Mensaje
+ Mensaje 1: "A"
+- Codificado 1: "0100000111010011110110011001111010001011"
+- Decodificado 1: "01000001","A"
+![alt text](img-1.png)
+
+Mensaje 2: "Hola"
+- Codificado 2: "0100100001101111011011000110000111001111100100100101011010110110"
+- Decodificado 2: "Hola","01001000011011110110110001100001"
+![alt text](img-2.png)
+
+Mensaje 3: "Hola Mundo"
+Codificado
+- Codificado 3: "0100100001101111011011000110000100100000010011010111010101101110011001000110111100100010010000110110111011010010"
+- Decodificado 3: "Hola Mundo", "01001000011011110110110001100001001000000100110101110101011011100110010001101111"
+![alt text](img-3.png)
+
+
+
+
+### Un Error
+Mensaje
+ Mensaje 1: "A"
+- Codificado 1: "0100000111010011110110011001111010001011"
+- Codificado modificado 1: "0100100111010011110110011001111010001011"
+- Bit alterado: Se modifica el quinto bit (posición 4, de 0 a 1).
+- El mensaje fue descartado debido a que se detecto un error.
+![alt text](img-4.png)
+
+Mensaje 2: "Hola"
+- Codificado 2: "0100100001101111011011000110000111001111100100100101011010110110"
+- Codificado modificado 2: "1100100001101111011011000110000111001111100100100101011010110110"
+- Bit alterado: Se modifica el primer bit (posición 0, de 0 a 1).
+- El mensaje fue descartado debido a que se detecto un error.
+![alt text](img-5.png)
+
+ Mensaje 3: "Hola Mundo"
+Codificado
+- Codificado 3: "0100100001101111011011000110000100100000010011010111010101101110011001000110111100100010010000110110111011010010"
+- Codificado modificado 3: "1100100001101111011011000110000100100000010011010111010101101110011001000110111100100010010000110110111011010010"
+- Bit alterado: Se modifica el primer bit (posición 0, de 0 a 1).
+- El mensaje fue descartado debido a que se detecto un error.
+ ![alt text](img-6.png)
+
+### Dos o Mas Errores
+
+Mensaje
+ Mensaje 1: "A"
+- Codificado 1: "0100000111010011110110011001111010001011" 
+- Codificado modificado 1: "0100101111010011110110011001111010001011"
+- Bits alterados: Se modifican los bits 5 y 7 (de 0 a 1 y de 0 a 1).
+![alt text](img-7.png)
+
+
+Mensaje 2: "Hola"
+- Codificado 2: "0100100001101111011011000110000111001111100100100101011010110110"
+- Codificado modificado 2: "1000100001101111011011000110000111001111100100100101011010110110"
+- Bits alterados: Se modifican los bits 0 y 1.
+![alt text](img-8.png)
+
+
+
+ Mensaje 3: "Hola Mundo"
+Codificado
+- Codificado 3: "100010000110111101101100011000011100111110010010010101101011011001011101001111001001001001110011"
+- Codificado modificado 3: "000000000110111101101100011000011100111110010010010101101011011001011101001111001001001001110011"
+- Bits alterados: Se modifican los bits 0 y 4.
+![alt text](img-9.png)
+
+
+
+### Justificación de resultados
+#### Sin errores:
+**Justificación:**
+
+
+#### Un error:
+**Justificación:**
+
+
+#### Dos o más errores:
+**Justificación:**
+
+
+
+## Preguntas
+#### ¿Es posible manipular los bits de tal forma que el algoritmo CRC-32 no detecte el error?
+
+
+
+#### Ventajas y desventajas
+
+**Ventajas:**
+
+
+
+**Desventajas:**
+
