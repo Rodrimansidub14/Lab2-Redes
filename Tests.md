@@ -1,7 +1,7 @@
 # Pruebas
 
 ### Rodrigo Alfonso Mansilla Dubón, 22611
-### 
+### Nelson Estuardo Escalante Sanchez, 22046
 
 
 Para cada algoritmo implementado, realizar pruebas de detección/corrección:
@@ -272,4 +272,4 @@ En el caso del algoritmo CRC-32, es posible, aunque altamente improbable, que ex
 
 - A diferencia del algoritmo de Viterbi, CRC-32 no es capaz de corregir errores, solo de detectarlos.
 - Tiene un overhead alto debido a que agrega 32 bits extra al mensaje.
-- Existen casos (aunque muy raros) en los que el algoritmo no detecte errores en mensajes corruptos.
+- Existen casos (aunque muy raros) en los que el algoritmo no detecte errores en mensajes corruptos.`
