@@ -1,3 +1,5 @@
+import socket
+
 POLY = 0xEDB88320
 
 def crc32_bitwise(data_bytes):
@@ -48,5 +50,24 @@ def verify_crc(complete_message_bin):
     else:
         print("Se detectaron errores en el mensaje recibido. Se descartara el mensaje")
 
-message = input("Ingrese el mensaje a revisar.").strip()
-verify_crc(message)
+def recibir_mensaje_socket(puerto=45000):
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        s.bind(('0.0.0.0', puerto))
+        s.listen(1)
+        print(f"Esperando mensaje en puerto {puerto} ...")
+        conn, addr = s.accept()
+        with conn:
+            print(f"Conexión desde {addr}")
+            data = b''
+            while True:
+                chunk = conn.recv(2048)
+                if not chunk:
+                    break
+                data += chunk
+            mensaje = data.decode().strip()
+            print("Mensaje recibido:", mensaje)
+            return mensaje
+
+if __name__ == "__main__":
+    mensaje = recibir_mensaje_socket(45000)
+    verify_crc(mensaje)
